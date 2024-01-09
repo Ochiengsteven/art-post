@@ -29,18 +29,18 @@ RSpec.describe Post, type: :model do
   end
 
   it 'returns the most recent comments with the specified limit' do
-    # Create some comments for the first_post with varying timestamps
     recent_comments = [
       Comment.create(post: first_post, user: first_user, text: 'Comment 1', created_at: Time.now - 1.hour),
       Comment.create(post: first_post, user: first_user, text: 'Comment 2', created_at: Time.now - 30.minutes),
       Comment.create(post: first_post, user: first_user, text: 'Comment 3', created_at: Time.now - 10.minutes)
     ]
 
-    # Extract the relevant attributes for comparison
     expected_attributes = recent_comments.map { |comment| comment.attributes.slice('text', 'created_at') }
 
-    # Ensure that the recent_comments method returns the expected comments
-    expect(first_post.recent_comments(3).order(created_at: :desc).pluck(:text, :created_at)).to match_array(expected_attributes.pluck('text', 'created_at'))
+    expect(first_post.recent_comments(3).order(created_at: :desc).pluck(:text,
+                                                                        :created_at)).to match_array(expected_attributes.pluck(
+                                                                                                       'text', 'created_at'
+                                                                                                     ))
   end
 
   it 'should raise an error if comments_counter is negative' do
