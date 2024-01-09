@@ -28,4 +28,27 @@ RSpec.describe User, type: :model do
     subject.posts_counter = 5
     expect(subject).to be_valid
   end
+
+  describe '#recent_posts' do
+    it 'returns the most recent posts with the specified limit' do
+      post1 = subject.posts.create(title: 'Post 1', text: 'This is post 1')
+      post2 = subject.posts.create(title: 'Post 2', text: 'This is post 2')
+      post3 = subject.posts.create(title: 'Post 3', text: 'This is post 3')
+
+      recent_posts = subject.recent_posts(2)
+
+      expect(recent_posts).to eq([post3, post2])
+      post1
+    end
+
+    it 'returns all recent posts if the limit is greater than the total number of posts' do
+      post1 = subject.posts.create(title: 'Post 1', text: 'This is post 1')
+      post2 = subject.posts.create(title: 'Post 2', text: 'This is post 2')
+      post3 = subject.posts.create(title: 'Post 3', text: 'This is post 3')
+
+      recent_posts = subject.recent_posts(5)
+
+      expect(recent_posts).to eq([post3, post2, post1])
+    end
+  end
 end
