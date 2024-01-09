@@ -14,6 +14,35 @@ RSpec.describe Post, type: :model do
     expect(subject.reload.comments_counter).to eq(initial_comments_counter + 1)
   end
 
+  describe '#update_author_posts_counter' do
+    it 'updates the author posts counter' do
+      user = User.create(name: 'Example User', photo: 'example.jpg', bio: 'Example bio')
+      post = Post.create(author: user, title: 'Test Post', text: 'This is a test post')
+
+      expect(post).to receive(:update_author_posts_counter).once
+
+      post.update_author_posts_counter
+
+      user.reload
+      expect(user.posts_counter).to eq(1)
+    end
+  end
+
+  it 'returns the most recent comments with the specified limit' do
+    # Create some comments for the first_post with varying timestamps
+    recent_comments = [
+      Comment.create(post: first_post, user: first_user, text: 'Comment 1', created_at: Time.now - 1.hour),
+      Comment.create(post: first_post, user: first_user, text: 'Comment 2', created_at: Time.now - 30.minutes),
+      Comment.create(post: first_post, user: first_user, text: 'Comment 3', created_at: Time.now - 10.minutes)
+    ]
+
+    # Extract the relevant attributes for comparison
+    expected_attributes = recent_comments.map { |comment| comment.attributes.slice('text', 'created_at') }
+
+    # Ensure that the recent_comments method returns the expected comments
+    expect(first_post.recent_comments(3).order(created_at: :desc).pluck(:text, :created_at)).to match_array(expected_attributes.pluck('text', 'created_at'))
+  end
+
   it 'should raise an error if comments_counter is negative' do
     subject.comments_counter = -1
     expect(subject).not_to be_valid
