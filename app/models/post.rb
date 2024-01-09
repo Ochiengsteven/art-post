@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  after_create :update_author_posts_counter
+
   def update_author_posts_counter
     author.update(posts_counter: author.posts.count)
   end

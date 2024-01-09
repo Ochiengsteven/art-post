@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
     expect(subject.posts_counter).to eq(initial_posts_counter)
 
     subject.posts.create(title: 'test', text: 'test')
+
     expect(subject.reload.posts_counter).to eq(initial_posts_counter + 1)
   end
 
