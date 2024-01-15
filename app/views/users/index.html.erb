@@ -3,7 +3,5 @@
 <% @users.each do |user| %>
     <div>
       <h2><%= user.name %></h2>
-      <p><%= link_to "View Details", user_path(user) %></p>
-      <p><%= link_to "View Posts", user_posts_path(user) %></p>
     </div>
 <% end %>
