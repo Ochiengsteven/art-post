@@ -1,7 +1,9 @@
 <h1>All posts</h1>
 
 <% @posts.each do |post| %>
-    <div>
-      <h2><%= post.title %></h2>
-    </div>
+  <div>
+    <h2><%= post.title %></h2>
+    <p><%= post.text %></p>
+    <p><%= link_to "View Details", post_path(post) %></p>
+  </div>
 <% end %>
