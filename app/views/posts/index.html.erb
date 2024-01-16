@@ -1,19 +1,25 @@
-<div>
-    <%= image_tag @user.photo, alt: @user.name, class: "user-image" %>
-    <h2><%= @user.name %></h2>
-    <p>Number of posts: <%= @user.posts_counter %></p>
+<div class="user-container">
+    <div class="image-container">
+        <%= image_tag @user.photo, alt: @user.name, class: "user-image" %>
+    </div>
+    <div class="counter-container">
+        <h2 class="user-name"><%= @user.name %></h2>
+        <p class="user-posts">Number of posts: <%= @user.posts_counter %></p>
+    </div>
 </div>
 
 <div>
   <% @posts.each do |post| %>
     <%= link_to post_path(post) do %>
       <div>
-        <div>
-          <h2><%= post.title %></h2>
-          <p><%= post.text %></p>
-          <div>
-            <p>Comments: <%= post.comments_counter %></p>
-            <p>Likes: <%= post.likes_counter %></p>
+        <div class="post-container">
+          <div class="post-details">
+              <h3><%= post.title %></h3>
+              <p><%= post.text %></p>
+          </div>
+          <div class="post-counters">
+              <p>Comments: <%= post.comments_counter %></p>
+              <p>Likes: <%= post.likes_counter %></p>
           </div>
         </div>
 

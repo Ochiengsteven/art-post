@@ -12,5 +12,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
+    @author_name = @post.author.name
   end
 end
