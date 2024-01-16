@@ -12,11 +12,16 @@
 
 <h2>Recent Posts</h2>
 <% @recent_posts.each do |post| %>
-  <div>
-    <h3><%= post.title %></h3>
-    <p><%= post.text %></p>
-    <p><%= link_to "View Details", post_path(post) %></p>
-  </div>
+    <%= link_to post_path(post) do %>
+        <div>
+            <h3><%= post.title %></h3>
+            <p><%= post.text %></p>
+        </div>
+        <div>
+            <p>Comments: <%= post.comments_counter %></p>
+            <p>Likes: <%= post.likes_counter %></p>
+        </div>
+    <% end %>
 <% end %>
 
 <%= link_to "View All Posts", user_posts_path(@user) %>
