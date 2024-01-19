@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments || []
+    @comments = @post.comments
     @author_name = @post.author.name
     @comment = Comment.new
   end
