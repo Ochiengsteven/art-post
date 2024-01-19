@@ -14,7 +14,10 @@
 </div>
 
 <!-- Add create post form here... -->
-<%= render 'posts/form' %>
+<h3>Create Post</h3>
+<div class="create-post">
+    <%= render 'posts/form' %>
+</div>
 
 <h2>Recent Posts</h2>
 <% @recent_posts.each do |post| %>
