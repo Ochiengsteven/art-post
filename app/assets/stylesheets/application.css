@@ -45,6 +45,9 @@ body {
 
 .user-container {
   background: #fff;
+  border-bottom: 6px solid #69dcd0;
+  border-radius: 8px;
+  box-shadow: 4px 4px 6px #c0bfbf;
 }
 
 .post-title {
@@ -70,12 +73,6 @@ body {
   border-radius: 8px;
   border: 0.5px solid #f3f3f4;
   background: #fff;
-}
-
-.user-container {
-  border-bottom: 6px solid #69dcd0;
-  border-radius: 8px;
-  box-shadow: 4px 4px 6px #c0bfbf;
 }
 
 .post-container {
