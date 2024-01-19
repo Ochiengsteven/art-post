@@ -14,6 +14,7 @@ class PostsController < ApplicationController
     @comments = @post.comments
     @author_name = @post.author.name
     @comment = Comment.new
+    @like = Like.new
   end
 
   def create
