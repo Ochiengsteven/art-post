@@ -1,3 +1,4 @@
+<!-- This is the post show file -->
 <div class="post-details-container">
     <div class="post-title">
         <h2><%= @post.title %> by <%= @author_name %></h2>
@@ -7,6 +8,13 @@
         </div>
     </div>
     <p class="post-details-text"><%= @post.text %></p>
+
+
+    <!-- Comments Form -->
+    <%= render 'comments/form' %>
+
+    <!-- Likes Form -->
+    <%= render 'likes/form' %>
 </div>
 
 <div>

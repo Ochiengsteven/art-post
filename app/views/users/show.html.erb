@@ -13,6 +13,12 @@
     <p><%= @user.bio %></p>
 </div>
 
+<!-- Add create post form here... -->
+<h3>Create Post</h3>
+<div class="create-post">
+    <%= render 'posts/form' %>
+</div>
+
 <h2>Recent Posts</h2>
 <% @recent_posts.each do |post| %>
     <%= link_to post_path(post) do %>

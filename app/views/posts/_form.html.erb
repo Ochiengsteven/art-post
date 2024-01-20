@@ -1,0 +1,11 @@
+<%= form_with(model: [@user, @post], url: user_posts_path(@user)) do |form| %>
+    <div class="mb-3">
+        <%= form.text_field :title, class: 'form-control', placeholder: 'Title' %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.text_area :text, class: 'form-control', placeholder: 'Text' %>
+    </div>
+
+    <%= form.submit "Create Post", class: 'btn btn-primary' %>
+<% end %>
