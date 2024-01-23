@@ -33,4 +33,35 @@ RSpec.describe 'Post', type: :feature do
       end
     end
   end
+  context 'show page' do
+    it 'shows how the post body.' do
+      if user.posts.any?
+        first_recent_post = user.most_recent_post[0]
+        visit user_post_path(user, first_recent_post)
+        expect(page).to have_content(first_recent_post.text)
+      end
+    end
+    it 'shows how the username of each commentor' do
+      if user.posts.any?
+        first_recent_post = user.most_recent_post[0]
+        visit user_post_path(user, first_recent_post)
+        if first_recent_post.comments.any?
+          first_recent_post.comments.each do |comment|
+            expect(page).to have_content(comment.user.name)
+          end
+        end
+      end
+    end
+    it 'shows the comment each commentor left.' do
+      if user.posts.any?
+        first_recent_post = user.most_recent_post[0]
+        visit user_post_path(user, first_recent_post)
+        if first_recent_post.comments.any?
+          first_recent_post.comments.each do |comment|
+            expect(page).to have_content(comment.text)
+          end
+        end
+      end
+    end
+  end
 end
