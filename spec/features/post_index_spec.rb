@@ -29,6 +29,19 @@ RSpec.describe 'Post', type: :feature do
     it "shows some of the post's body." do
       expect(page).to have_content(post.text[0, 200])
     end
+
+    it 'shows the first 5 recent comments on a post' do
+      post_with_comments = Post.create(author: user, title: 'Post with comments', text: 'This post has comments')
+      7.times { |i| post_with_comments.comments.create(text: "Comment #{i + 1}") }
+
+      visit user_posts_path(user)
+
+      within('.post-container', text: post_with_comments.title) do
+        post_with_comments.recent_comments(5).each do |comment|
+          expect(page).to have_content(comment.text)
+        end
+      end
+    end
   end
 
   context 'index' do
@@ -42,6 +55,9 @@ RSpec.describe 'Post', type: :feature do
 
     it 'shows how many likes a post has.' do
       expect(page).to have_content("Likes: #{post.likes_counter}")
+    end
+    it 'shows a section for pagination ' do
+      expect(page).to have_button('Pagination')
     end
   end
 
