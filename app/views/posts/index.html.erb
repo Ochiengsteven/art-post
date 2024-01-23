@@ -15,7 +15,11 @@
         <div class="post-container">
           <div class="post-details">
               <h3><%= post.title %></h3>
-              <p><%= post.text %></p>
+              <p>
+                <%= truncate(post.text, length: 130, omission: '...') %>
+                <% if post.text.length > 20 %>
+                <% end %>
+              </p>
           </div>
           <div class="post-counters">
               <p>Comments: <%= post.comments_counter %></p>
@@ -34,4 +38,5 @@
       </div>
     <% end %>
   <% end %>
+  <button> Pagination </button>
 </div>
