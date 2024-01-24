@@ -19,4 +19,14 @@
       <% end %>
     <% end %>
   <% else %>
-  
+  <div class=main-login>
+    <h1> Welcome to <span> Art post</span></h1>
+    <%= link_to new_user_registration_path, class: 'button' do %>
+      <button class='btn'>Sign Up</button>
+    <% end %>
+    <%= link_to new_user_session_path, class: 'button' do %>
+      <button class='btn'>Log In</button>
+    <% end %>
+  <% end %>
+  </div>
+</div>
