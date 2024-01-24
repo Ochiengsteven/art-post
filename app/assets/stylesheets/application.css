@@ -131,3 +131,17 @@ body {
   align-items: center;
   gap: 4vw;
 }
+
+.field input,
+.actions input,
+textarea {
+  width: 40vw;
+  height: 6vh;
+  margin-bottom: 10px;
+}
+
+.main_div .button button {
+  width: 15vw;
+  height: 8vh;
+  margin: 10px;
+}
