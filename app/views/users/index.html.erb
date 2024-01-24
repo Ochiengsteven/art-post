@@ -1,13 +1,32 @@
-<% @users.each do |user| %>
-  <%= link_to user_path(user), class: "user-link" do %>
-    <div class="user-container">
-      <div class="image-container">
-        <%= image_tag user.photo, alt: user.name, class: "user-image" %>
-      </div>
-      <div class="counter-container">
-        <h2 class="user-name"><%= user.name %></h2>
-        <p class="user-posts">Number of posts: <%= user.posts_counter %></p>
-      </div>
-    </div>
+<div class='main_div'>
+  <% if user_signed_in? %>
+    <h2>Home</h2>
+
+    <% @users.each do |user| %>
+      <%= link_to user_path(user), class: "user-link" do %>
+        <div class="user-container">
+          <div class="image-container">
+            <% if user.photo.present? %>
+              <%= image_tag user.photo, alt: user.name, class: "user-image" %>
+            <% else %>
+              <%= image_tag "https://bit.ly/3HvUkch", alt: user.name, class: "user-image" %>
+            <% end %>          </div>
+          <div class="counter-container">
+            <h2 class="user-name"><%= user.name %></h2>
+            <p class="user-posts">Number of posts: <%= user.posts_counter %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+  <div class=main-login>
+    <h1> Welcome to <span> Art post</span></h1>
+    <%= link_to new_user_registration_path, class: 'button' do %>
+      <button class='btn'>Sign Up</button>
+    <% end %>
+    <%= link_to new_user_session_path, class: 'button' do %>
+      <button class='btn'>Log In</button>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+</div>

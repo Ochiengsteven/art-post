@@ -1,6 +1,10 @@
 <div class="user-container">
     <div class="image-container">
-        <%= image_tag @user.photo, alt: @user.name, class: "user-image" %>
+        <% if @user.photo.present? %>
+            <%= image_tag @user.photo, alt: @user.name, class: "user-image" %>
+        <% else %>
+            <%= image_tag "https://bit.ly/3HvUkch", alt: @user.name, class: "user-image" %>
+        <% end %>
     </div>
     <div class="counter-container">
         <h2 class="user-name"><%= @user.name %></h2>
