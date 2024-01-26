@@ -28,7 +28,14 @@
     <h2>Comments:</h2>
     <ul>
         <% @comments.each do |comment| %>
-            <li>"<%= comment.text %>"</li>
-        <% end %>
+            <li>
+                "<%= comment.text %>"
+                <% if can? :destroy, comment %>
+                    <%= form_with(model: [@post, comment], method: :delete, url: user_post_comment_path(@user, @post, comment), data: { turbo_frame: 'reload' }) do |form| %>
+                    <%= form.submit 'Delete Comment', class: 'btn', data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                <% end %>
+            </li>
+        <% end %>      
     </ul>
 </div>
