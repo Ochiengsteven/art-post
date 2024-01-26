@@ -8,6 +8,7 @@
         </div>
     </div>
     <p class="post-details-text"><%= @post.text %></p>
+    <p class="post-details-text"><%= @user.role %></p>
 
 
     <!-- Comments Form -->
@@ -15,6 +16,12 @@
 
     <!-- Likes Form -->
     <%= render 'likes/form' %>
+
+    <% if can? :destroy, @post %>
+        <%= form_with(model: [@user, @post], method: :delete, data: { turbo_frame: 'reload' }) do |form| %>
+            <%= form.submit 'Delete Post', class: 'btn', data: { confirm: 'Are you sure?' } %>
+        <% end %>
+    <% end %>
 </div>
 
 <div>
