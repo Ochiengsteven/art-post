@@ -8,7 +8,6 @@
         </div>
     </div>
     <p class="post-details-text"><%= @post.text %></p>
-    <p class="post-details-text"><%= @user.role %></p>
 
 
     <!-- Comments Form -->
@@ -28,7 +27,7 @@
     <h2>Comments:</h2>
     <ul>
         <% @comments.each do |comment| %>
-            <li>
+            <li class="comment_container">
                 "<%= comment.text %>"
                 <% if can? :destroy, comment %>
                     <%= form_with(model: [@post, comment], method: :delete, url: user_post_comment_path(@user, @post, comment), data: { turbo_frame: 'reload' }) do |form| %>
