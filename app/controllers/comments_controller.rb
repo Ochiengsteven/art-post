@@ -1,6 +1,6 @@
-# comments_controller.rb
 class CommentsController < ApplicationController
-  before_action :load_post, only: %i[new create]
+  before_action :load_post, only: %i[new create destroy]
+  before_action :load_comment, only: [:destroy]
 
   def new
     @comment = @post.comments.new
@@ -18,6 +18,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    redirect_to post_path(@post), notice: 'Comment was successfully deleted.'
+  end
+
   private
 
   def load_post
@@ -26,5 +31,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text)
+  end
+
+  def load_comment
+    @comment = @post.comments.find(params[:id])
   end
 end
