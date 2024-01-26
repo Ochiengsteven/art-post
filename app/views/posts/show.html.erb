@@ -15,13 +15,26 @@
 
     <!-- Likes Form -->
     <%= render 'likes/form' %>
+
+    <% if can? :destroy, @post %>
+        <%= form_with(model: [@user, @post], method: :delete, data: { turbo_frame: 'reload' }) do |form| %>
+            <%= form.submit 'Delete Post', class: 'btn-delete', data: { confirm: 'Are you sure?' } %>
+        <% end %>
+    <% end %>
 </div>
 
 <div>
     <h2>Comments:</h2>
     <ul>
         <% @comments.each do |comment| %>
-            <li>"<%= comment.text %>"</li>
-        <% end %>
+            <li class="comment_container">
+                "<%= comment.text %>"
+                <% if can? :destroy, comment %>
+                    <%= form_with(model: [@post, comment], method: :delete, url: user_post_comment_path(@user, @post, comment), data: { turbo_frame: 'reload' }) do |form| %>
+                    <%= form.submit 'Delete Comment', class: 'btn-delete', data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                <% end %>
+            </li>
+        <% end %>      
     </ul>
 </div>

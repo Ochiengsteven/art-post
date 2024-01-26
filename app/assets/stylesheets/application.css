@@ -145,3 +145,17 @@ textarea {
   height: 8vh;
   margin: 10px;
 }
+
+/* DELETE BUTTONS */
+.btn-delete {
+  background-color: #990525;
+  color: #fff;
+  border: none;
+  padding: 4px;
+}
+
+.comment_container {
+  display: flex;
+  justify-content: space-between;
+  width: 40vw;
+}
