@@ -1,6 +1,5 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_post, only: %i[index create]
-#   before_action :authenticate_user!, only: [:create]
   skip_before_action :verify_authenticity_token
 
   # GET /api/v1/users/:user_id/posts/:post_id/comments
